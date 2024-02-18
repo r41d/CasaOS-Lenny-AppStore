@@ -1,0 +1,43 @@
+name: audiobookshelf
+services:
+  audiobookshelf:
+    cpu_shares: 90
+    command: []
+    container_name: AudioBookShelf
+    image: ghcr.io/advplyr/audiobookshelf:latest
+    ports:
+      - target: 80
+        published: "13378"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/audiobookshelf/audiobooks
+        target: /audiobooks
+      - type: bind
+        source: /DATA/AppData/audiobookshelf/podcasts
+        target: /podcasts
+      - type: bind
+        source: /DATA/AppData/audiobookshelf/config
+        target: /config
+      - type: bind
+        source: /DATA/AppData/audiobookshelf/metadata
+        target: /metadata
+    devices: []
+    cap_add: []
+    environment: []
+    network_mode: bridge
+    privileged: false
+    hostname: audiobookshelf
+x-casaos:
+  author: LennyCasa
+  category: LennyCasa
+  hostname: ""
+  icon: https://www.audiobookshelf.org/Logo48.png
+  index: /
+  port_map: 13378
+  scheme: http
+  store_app_id: audiobookshelf
+  title:
+    custom: AudioBookShelf
+
